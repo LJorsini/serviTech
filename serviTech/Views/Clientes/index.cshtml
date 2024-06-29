@@ -1,0 +1,101 @@
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Clientes</h1>
+</div>
+
+
+<div class="mb-2">
+    <button type="button" onclick="ListadoProyectos()" class="btn btn-primary">
+        Actualizar Tabla
+    </button>
+    <button type="button" id="nuevoProyecto" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#ModalClientes">
+        Cargar nuevo cliente
+    </button>
+</div>
+
+<div class="modal" id="ModalClientes" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <input type="hidden" id="idCliente" value="0">
+
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre"
+                            placeholder="Ingrese el nombre del empleado">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido"
+                            placeholder="Ingrese el apellido del empleado">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Direccion</label>
+                        <input type="text" class="form-control" id="direccion" placeholder="Direccion">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Ingrese el Email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input type="number" class="form-control" id="telefono" placeholder="Ingrese el telefono">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dni" class="form-label">DNI</label>
+                        <input type="number" class="form-control" id="dni" placeholder="Ingrese el dni">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    onclick="LimpiarModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="NuevoCliente()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">DNI</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+
+    <tbody id="body-tabla">
+
+    </tbody>
+</table>
+
+
+@section Scripts {
+
+    <script src='~/js/cliente.js'></script>
+
+}

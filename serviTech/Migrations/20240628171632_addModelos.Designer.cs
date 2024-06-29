@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using serviTech.Data;
 
@@ -11,9 +12,11 @@ using serviTech.Data;
 namespace serviTech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240628171632_addModelos")]
+    partial class addModelos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,6 +227,48 @@ namespace serviTech.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("serviTech.Models.Cliente", b =>
+                {
+                    b.Property<int>("IdCliente")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCliente"));
+
+                    b.Property<int>("IdPersona")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonasIdPersona")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdCliente");
+
+                    b.HasIndex("PersonasIdPersona");
+
+                    b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Empleado", b =>
+                {
+                    b.Property<int>("IdEmpleado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEmpleado"));
+
+                    b.Property<int>("IdPersona")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonasIdPersona")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdEmpleado");
+
+                    b.HasIndex("PersonasIdPersona");
+
+                    b.ToTable("Empleados");
+                });
+
             modelBuilder.Entity("serviTech.Models.Localidad", b =>
                 {
                     b.Property<int>("IdLocalidad")
@@ -262,11 +307,6 @@ namespace serviTech.Migrations
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
                     b.Property<int?>("Dni")
                         .HasColumnType("int");
 
@@ -288,10 +328,6 @@ namespace serviTech.Migrations
                     b.HasKey("IdPersona");
 
                     b.ToTable("Personas");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Persona");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("serviTech.Models.Provincia", b =>
@@ -308,42 +344,6 @@ namespace serviTech.Migrations
                     b.HasKey("IdProvincia");
 
                     b.ToTable("Provincias");
-                });
-
-            modelBuilder.Entity("serviTech.Models.Cliente", b =>
-                {
-                    b.HasBaseType("serviTech.Models.Persona");
-
-                    b.Property<int>("IdCliente")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonasIdPersona")
-                        .HasColumnType("int");
-
-                    b.HasIndex("PersonasIdPersona");
-
-                    b.ToTable("Personas", t =>
-                        {
-                            t.Property("PersonasIdPersona")
-                                .HasColumnName("Cliente_PersonasIdPersona");
-                        });
-
-                    b.HasDiscriminator().HasValue("Cliente");
-                });
-
-            modelBuilder.Entity("serviTech.Models.Empleado", b =>
-                {
-                    b.HasBaseType("serviTech.Models.Persona");
-
-                    b.Property<int>("IdEmpleado")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonasIdPersona")
-                        .HasColumnType("int");
-
-                    b.HasIndex("PersonasIdPersona");
-
-                    b.HasDiscriminator().HasValue("Empleado");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -397,17 +397,6 @@ namespace serviTech.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("serviTech.Models.Localidad", b =>
-                {
-                    b.HasOne("serviTech.Models.Provincia", "Provincias")
-                        .WithMany("Localidades")
-                        .HasForeignKey("ProvinciasIdProvincia")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Provincias");
-                });
-
             modelBuilder.Entity("serviTech.Models.Cliente", b =>
                 {
                     b.HasOne("serviTech.Models.Persona", "Personas")
@@ -428,6 +417,17 @@ namespace serviTech.Migrations
                         .IsRequired();
 
                     b.Navigation("Personas");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Localidad", b =>
+                {
+                    b.HasOne("serviTech.Models.Provincia", "Provincias")
+                        .WithMany("Localidades")
+                        .HasForeignKey("ProvinciasIdProvincia")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Provincias");
                 });
 
             modelBuilder.Entity("serviTech.Models.Persona", b =>
