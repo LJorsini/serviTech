@@ -61,6 +61,11 @@
                         <label for="dni" class="form-label">DNI</label>
                         <input type="number" class="form-control" id="dni" placeholder="Ingrese el dni">
                     </div>
+
+                    <div class="form-group">
+                        <label for="ProvinciaId">Provincia</label>
+                        @Html.DropDownList("ProvinciaId", ViewBag.Provincias as List<SelectListItem>, "Seleccione una provincia", new { @class = "form-control" })
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

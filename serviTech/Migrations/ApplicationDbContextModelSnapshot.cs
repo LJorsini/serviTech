@@ -250,11 +250,11 @@ namespace serviTech.Migrations
 
             modelBuilder.Entity("serviTech.Models.Persona", b =>
                 {
-                    b.Property<int>("IdPersona")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPersona"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Apellido")
                         .HasColumnType("nvarchar(max)");
@@ -285,7 +285,7 @@ namespace serviTech.Migrations
                     b.Property<int?>("Telefono")
                         .HasColumnType("int");
 
-                    b.HasKey("IdPersona");
+                    b.HasKey("Id");
 
                     b.ToTable("Personas");
 
@@ -314,18 +314,15 @@ namespace serviTech.Migrations
                 {
                     b.HasBaseType("serviTech.Models.Persona");
 
-                    b.Property<int>("IdCliente")
+                    b.Property<int?>("PersonaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PersonasIdPersona")
-                        .HasColumnType("int");
-
-                    b.HasIndex("PersonasIdPersona");
+                    b.HasIndex("PersonaId");
 
                     b.ToTable("Personas", t =>
                         {
-                            t.Property("PersonasIdPersona")
-                                .HasColumnName("Cliente_PersonasIdPersona");
+                            t.Property("PersonaId")
+                                .HasColumnName("Cliente_PersonaId");
                         });
 
                     b.HasDiscriminator().HasValue("Cliente");
@@ -335,13 +332,10 @@ namespace serviTech.Migrations
                 {
                     b.HasBaseType("serviTech.Models.Persona");
 
-                    b.Property<int>("IdEmpleado")
+                    b.Property<int?>("PersonaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PersonasIdPersona")
-                        .HasColumnType("int");
-
-                    b.HasIndex("PersonasIdPersona");
+                    b.HasIndex("PersonaId");
 
                     b.HasDiscriminator().HasValue("Empleado");
                 });
@@ -410,24 +404,32 @@ namespace serviTech.Migrations
 
             modelBuilder.Entity("serviTech.Models.Cliente", b =>
                 {
-                    b.HasOne("serviTech.Models.Persona", "Personas")
-                        .WithMany("Clientes")
-                        .HasForeignKey("PersonasIdPersona")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("serviTech.Models.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Personas");
+                    b.HasOne("serviTech.Models.Persona", null)
+                        .WithMany("Clientes")
+                        .HasForeignKey("PersonaId");
+
+                    b.Navigation("Persona");
                 });
 
             modelBuilder.Entity("serviTech.Models.Empleado", b =>
                 {
-                    b.HasOne("serviTech.Models.Persona", "Personas")
-                        .WithMany("Empleados")
-                        .HasForeignKey("PersonasIdPersona")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("serviTech.Models.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Personas");
+                    b.HasOne("serviTech.Models.Persona", null)
+                        .WithMany("Empleados")
+                        .HasForeignKey("PersonaId");
+
+                    b.Navigation("Persona");
                 });
 
             modelBuilder.Entity("serviTech.Models.Persona", b =>

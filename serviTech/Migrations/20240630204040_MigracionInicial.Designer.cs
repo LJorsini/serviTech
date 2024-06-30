@@ -12,7 +12,7 @@ using serviTech.Data;
 namespace serviTech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240624222932_MigracionInicial")]
+    [Migration("20240630204040_MigracionInicial")]
     partial class MigracionInicial
     {
         /// <inheritdoc />
@@ -227,6 +227,122 @@ namespace serviTech.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("serviTech.Models.Localidad", b =>
+                {
+                    b.Property<int>("IdLocalidad")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdLocalidad"));
+
+                    b.Property<int>("Cp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProvinciasIdProvincia")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdLocalidad");
+
+                    b.HasIndex("ProvinciasIdProvincia");
+
+                    b.ToTable("Localidades");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Persona", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Apellido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<int?>("Dni")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdLocalidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProvincia")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Telefono")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Personas");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Persona");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("serviTech.Models.Provincia", b =>
+                {
+                    b.Property<int>("IdProvincia")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProvincia"));
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdProvincia");
+
+                    b.ToTable("Provincias");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Cliente", b =>
+                {
+                    b.HasBaseType("serviTech.Models.Persona");
+
+                    b.Property<int?>("PersonaId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PersonaId");
+
+                    b.ToTable("Personas", t =>
+                        {
+                            t.Property("PersonaId")
+                                .HasColumnName("Cliente_PersonaId");
+                        });
+
+                    b.HasDiscriminator().HasValue("Cliente");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Empleado", b =>
+                {
+                    b.HasBaseType("serviTech.Models.Persona");
+
+                    b.Property<int?>("PersonaId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PersonaId");
+
+                    b.HasDiscriminator().HasValue("Empleado");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -276,6 +392,59 @@ namespace serviTech.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("serviTech.Models.Localidad", b =>
+                {
+                    b.HasOne("serviTech.Models.Provincia", "Provincias")
+                        .WithMany("Localidades")
+                        .HasForeignKey("ProvinciasIdProvincia")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Provincias");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Cliente", b =>
+                {
+                    b.HasOne("serviTech.Models.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("serviTech.Models.Persona", null)
+                        .WithMany("Clientes")
+                        .HasForeignKey("PersonaId");
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Empleado", b =>
+                {
+                    b.HasOne("serviTech.Models.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("serviTech.Models.Persona", null)
+                        .WithMany("Empleados")
+                        .HasForeignKey("PersonaId");
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Persona", b =>
+                {
+                    b.Navigation("Clientes");
+
+                    b.Navigation("Empleados");
+                });
+
+            modelBuilder.Entity("serviTech.Models.Provincia", b =>
+                {
+                    b.Navigation("Localidades");
                 });
 #pragma warning restore 612, 618
         }
