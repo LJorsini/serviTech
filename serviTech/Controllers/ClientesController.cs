@@ -20,7 +20,7 @@ public class ClientesController : Controller
         var provincias = _context.Provincias.ToList();
         var provinciasListItems = provincias.Select(p => new SelectListItem
         {
-            Value = p.IdProvincia.ToString(),
+            Value = p.ProvinciaID.ToString(),
             Text = p.Nombre
         }).ToList();
 
