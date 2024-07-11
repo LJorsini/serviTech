@@ -54,46 +54,34 @@ namespace serviTech.Migrations
                 name: "Personas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    PersonaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdLocalidad = table.Column<int>(type: "int", nullable: false),
-                    IdProvincia = table.Column<int>(type: "int", nullable: false),
+                    LocalidadID = table.Column<int>(type: "int", nullable: false),
+                    ProvinciaID = table.Column<int>(type: "int", nullable: false),
+                    CP = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telefono = table.Column<int>(type: "int", nullable: true),
-                    Dni = table.Column<int>(type: "int", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    Cliente_PersonaId = table.Column<int>(type: "int", nullable: true),
-                    PersonaId = table.Column<int>(type: "int", nullable: true)
+                    Dni = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Personas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Personas_Personas_Cliente_PersonaId",
-                        column: x => x.Cliente_PersonaId,
-                        principalTable: "Personas",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Personas_Personas_PersonaId",
-                        column: x => x.PersonaId,
-                        principalTable: "Personas",
-                        principalColumn: "Id");
+                    table.PrimaryKey("PK_Personas", x => x.PersonaID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Provincias",
                 columns: table => new
                 {
-                    IdProvincia = table.Column<int>(type: "int", nullable: false)
+                    ProvinciaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Provincias", x => x.IdProvincia);
+                    table.PrimaryKey("PK_Provincias", x => x.ProvinciaID);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,23 +191,61 @@ namespace serviTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Localidades",
+                name: "Clientes",
                 columns: table => new
                 {
-                    IdLocalidad = table.Column<int>(type: "int", nullable: false)
+                    ClienteID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cp = table.Column<int>(type: "int", nullable: false),
-                    ProvinciasIdProvincia = table.Column<int>(type: "int", nullable: false)
+                    PersonaID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Localidades", x => x.IdLocalidad);
+                    table.PrimaryKey("PK_Clientes", x => x.ClienteID);
                     table.ForeignKey(
-                        name: "FK_Localidades_Provincias_ProvinciasIdProvincia",
-                        column: x => x.ProvinciasIdProvincia,
+                        name: "FK_Clientes_Personas_PersonaID",
+                        column: x => x.PersonaID,
+                        principalTable: "Personas",
+                        principalColumn: "PersonaID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Empleados",
+                columns: table => new
+                {
+                    EmpleadoID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PersonaID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Empleados", x => x.EmpleadoID);
+                    table.ForeignKey(
+                        name: "FK_Empleados_Personas_PersonaID",
+                        column: x => x.PersonaID,
+                        principalTable: "Personas",
+                        principalColumn: "PersonaID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Localidades",
+                columns: table => new
+                {
+                    LocalidadID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProvinciaID = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cp = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Localidades", x => x.LocalidadID);
+                    table.ForeignKey(
+                        name: "FK_Localidades_Provincias_ProvinciaID",
+                        column: x => x.ProvinciaID,
                         principalTable: "Provincias",
-                        principalColumn: "IdProvincia",
+                        principalColumn: "ProvinciaID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -263,19 +289,19 @@ namespace serviTech.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Localidades_ProvinciasIdProvincia",
+                name: "IX_Clientes_PersonaID",
+                table: "Clientes",
+                column: "PersonaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Empleados_PersonaID",
+                table: "Empleados",
+                column: "PersonaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Localidades_ProvinciaID",
                 table: "Localidades",
-                column: "ProvinciasIdProvincia");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Personas_Cliente_PersonaId",
-                table: "Personas",
-                column: "Cliente_PersonaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Personas_PersonaId",
-                table: "Personas",
-                column: "PersonaId");
+                column: "ProvinciaID");
         }
 
         /// <inheritdoc />
@@ -297,16 +323,22 @@ namespace serviTech.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Localidades");
+                name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Personas");
+                name: "Empleados");
+
+            migrationBuilder.DropTable(
+                name: "Localidades");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Personas");
 
             migrationBuilder.DropTable(
                 name: "Provincias");
