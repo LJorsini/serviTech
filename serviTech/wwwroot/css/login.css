@@ -1,6 +1,32 @@
+.main-login {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
 
+.main-section {
+    display: flex;
+    align-items: center;
+    
+}
 
+.div-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    height: 80vh;
+    
+}
 
+.div-img {
+    height: 80vh;
+    background-image: url("../img/logo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
 
 
 
