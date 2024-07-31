@@ -71,7 +71,8 @@
                             <p>Lugar donde se cargan y ven ordenes de trabajo</p>
                         </div>
                         <div class="card-action">
-                            <button data-target="ModalCargarCliente" class="btn modal-trigger">Nueva orden de trabajo</button>
+                            <button data-target="ModalCargarCliente" class="btn modal-trigger">Nueva orden de
+                                trabajo</button>
                             <button data-target="ModalCargarCliente" class="btn modal-trigger">Ordenes de trabajo</button>
                         </div>
                     </div>
@@ -147,9 +148,13 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">place</i>
-                                    <input id="provincia" type="text" class="validate">
-                                    <label for="provincia">Provincia</label>
+                                    @* <input id="provincia" type="text" class="validate"> *@
+
+                                    <label for="Provincia">Provincia</label>
+                                    @Html.DropDownList("Provincia", null, htmlAttributes: new { @class = "form-control" })
+
                                 </div>
+                                
 
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">markunread_mailbox</i>
