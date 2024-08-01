@@ -1,9 +1,13 @@
-header, main {
+header {
     padding-left: 300px;
 }
 
 @media only screen and (max-width : 992px) {
-    header, main {
+    header {
         padding-left: 0;
     }
+}
+
+.h4-navbar {
+    color: black;
 }

@@ -16,16 +16,18 @@
 </head>
 
 
-<body class="has-fixed-sidenav">
+<body class="">
     @if (SignInManager.IsSignedIn(User))
     {
-        <header>
+        <header class="">
 
 
             
                 <div class="navbar-fixed">
-                    <nav class="navbar blue">
-                        <div class="nav-wrapper"></div>
+                    <nav class="navbar white">
+                        <div class="nav-wrapper">
+                            <h4 class="h4-navbar">Servitech</h4>
+                        </div>
                     </nav>
                 </div>
             
@@ -35,16 +37,16 @@
                         <div class="background">
                             <img src="~/img/logo.jpg">
                         </div>
-                        <a href="#user"><img class="circle" src="~/img/logo.jpg"></a>
+                        <a href="#user"><img class="circle" src="~/img/usuario.jpg"></a>
                         <a href="#name"><span class="white-text name">Lucas Orsini</span></a>
                         <a href="#email"><span class="white-text email">@User.Identity?.Name</span></a>
                     </div>
                 </li>
 
                 <li><a href="~/Clientes/Index"><i class="material-icons">supervisor_account</i>Clientes</a></li>
-                <li><a href="#!"><i class="material-icons">request_quote</i>Presupuestos</a></li>
-                <li><a href="#!"><i class="material-icons">engineering</i>Ordenes de Trabajo</a></li>
-                <li><a href="#!"><i class="material-icons">inventory</i>Stock</a></li>
+                <li><a href="~/Presupuestos/Index"><i class="material-icons">request_quote</i>Presupuestos</a></li>
+                <li><a href="~/Ordenes/Index"><i class="material-icons">engineering</i>Ordenes de Trabajo</a></li>
+                <li><a href="~/Stock/Index"><i class="material-icons">inventory</i>Stock</a></li>
 
                 <li class="center-align">
                     <form class="" asp-area="Identity" asp-page="/Account/Logout"
