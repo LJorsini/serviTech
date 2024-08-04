@@ -2,40 +2,142 @@
     ViewData["Title"] = "Clientes";
 }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
 
 <div class="text-center">
-    <h1 class="display-4">Clientes</h1>
+    <h3 class="display-4">Clientes</h3>
+</div>
+
+
+@* <div class="">
+<div class="row outlined">
+<div class="input-field outlined col s6">
+<i class="material-icons prefix">search</i>
+<input type="text" id="autocomplete-input" class="autocomplete">
+<label class="active" for="autocomplete-input">Buscar Cliente</label>
+</div>
+</div>
+</div> *@
+
+
+
+<div class="container">
+    <ul class="collapsible">
+        <li>
+            <div class="collapsible-header"><i class="material-icons">person</i>Clientes</div>
+            <div class="collapsible-body">
+                
+                    <div class="row outlined">
+                        <div class="input-field outlined col s12">
+                            <i class="material-icons prefix">search</i>
+                            <input type="text" id="autocomplete-input" class="autocomplete">
+                            <label class="active" for="autocomplete-input">Buscar Cliente</label>
+                        </div>
+                    </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>DNI</th>
+                            <th>Direccion</th>
+                            <th>Localidad</th>
+                            <th>Provincia</th>
+                            <th>CP</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="body-tabla">
+
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <div class="collapsible-header"><i class="material-icons">person_add</i>Agregar Cliente</div>
+            <div class="collapsible-body">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">DNI</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Direccion</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Localidad</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Provincia</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">CP</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Email</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Telefono</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
 </div>
 
 
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Email</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">DNI</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
 
 
-    <tbody id="body-tabla">
-
-    </tbody>
-</table>
 
 
-@section Scripts {
 
-    <script src='~/js/cliente.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-   
 
-}
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems);
+    });
+</script>
