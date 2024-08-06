@@ -21,7 +21,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         
-        <header class="">
+        <header class="header-login">
 
 
             
@@ -82,7 +82,7 @@
     else
     {
         <div class="main-container">
-            <main role="main" class="pb-3">
+            <main role="main" class="">
                 @RenderBody()
             </main>
         </div>

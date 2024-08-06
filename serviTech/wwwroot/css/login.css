@@ -1,7 +1,12 @@
 .main-login {
-    display: flex;
+   /*  display: flex;
     align-items: center;
     height: 100vh;
+    background-image: url("../img/smartGrande.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; */
+    
+
     
 }
 
@@ -21,13 +26,13 @@
     
 }
 
-.div-img {
+/* .div-img {
     height: 80vh;
     background-image: url("../img/logo.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     
-}
+} */
 
 
 
