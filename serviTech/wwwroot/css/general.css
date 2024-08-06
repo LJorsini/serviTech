@@ -2,6 +2,12 @@
     border: 2px solid #000;
 }
 
-.mt-10 {
-    margin-top: 10px;
+.h3{
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
+}
+
+.div-secciones {
+    width: 95%;
 }

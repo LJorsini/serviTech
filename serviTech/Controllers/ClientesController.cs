@@ -17,15 +17,19 @@ public class ClientesController : Controller
 
      public IActionResult Index()
     {
+
         var provincias = _context.Provincias.ToList();
         var provinciasListItems = provincias.Select(p => new SelectListItem
-        {
+        {   
             Value = p.ProvinciaID.ToString(),
             Text = p.Nombre
         }).ToList();
 
         ViewBag.Provincias = provinciasListItems;
+        ViewBag.List = new SelectList(provinciasListItems, "Text", "Value");
         return View();
     }
     
 }
+
+ 
