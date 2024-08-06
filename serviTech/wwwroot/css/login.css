@@ -1,15 +1,3 @@
-.main-login {
-   /*  display: flex;
-    align-items: center;
-    height: 100vh;
-    background-image: url("../img/smartGrande.jpg");
-    background-repeat: no-repeat;
-    background-size: cover; */
-    
-
-    
-}
-
 .main-section {
     display: flex;
     align-items: center;
@@ -26,13 +14,7 @@
     
 }
 
-/* .div-img {
-    height: 80vh;
-    background-image: url("../img/logo.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-} */
+
 
 
 
