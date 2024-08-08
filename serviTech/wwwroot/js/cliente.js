@@ -1,4 +1,6 @@
-function CargarClientes() {
+window.onload = ListdoClientes();
+
+function ListdoClientes() {
     
 }
 
