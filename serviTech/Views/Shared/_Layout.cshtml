@@ -14,32 +14,38 @@
     <link rel="stylesheet" href="~/css/general.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/serviTech.styles.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet">
 </head>
 
 
 <body class="">
     @if (SignInManager.IsSignedIn(User))
     {
-        
+
         <header class="header-login">
 
 
-            
-                <div class="navbar-fixed">
-                    <nav class="navbar white">
-                        <div class="nav-wrapper valign-wrapper navbar">
-                            <h4 class="h4-navbar">ServiTech</h4>
-                        </div>
-                    </nav>
-                </div>
-            
+
+            <div class="navbar-fixed">
+                <nav class="navbar white">
+                    <div class="nav-wrapper valign-wrapper navbar .new-amsterdam-regular">
+                        <h4 class="h4-navbar .new-amsterdam-regular">ServiTech</h4>
+                    </div>
+
+
+                </nav>
+            </div>
+
             <ul class="sidenav sidenav-fixed" id="menu-side">
                 <li>
                     <div class="user-view">
                         <div class="background">
                             <img src="~/img/logo.jpg">
                         </div>
-                        <a href="#user"><img class="circle" src="~/img/usuario.jpg"></a>
+                        <a href="~/Home/Index"><img class="circle" src="~/img/usuario.jpg"></a>
                         <a href="#name"><span class="white-text name">Lucas Orsini</span></a>
                         <a href="#email"><span class="white-text email">@User.Identity?.Name</span></a>
                     </div>
@@ -49,6 +55,12 @@
                 <li><a href="~/Presupuestos/Index"><i class="material-icons">request_quote</i>Presupuestos</a></li>
                 <li><a href="~/Ordenes/Index"><i class="material-icons">engineering</i>Ordenes de Trabajo</a></li>
                 <li><a href="~/Stock/Index"><i class="material-icons">inventory</i>Stock</a></li>
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                </ul>
 
                 <li class="center-align">
                     <form class="" asp-area="Identity" asp-page="/Account/Logout"
@@ -63,11 +75,11 @@
         </header>
 
         @* <main class="main-content">
-            <div class="container">
-                
-            </div>
-        </main> *@
-        
+    <div class="container">
+
+    </div>
+    </main> *@
+
 
         <div class="" id="wrapper">
             <div id="page-content-wrapper">
