@@ -1,7 +1,7 @@
-const ctx = document.getElementById('myChart');
+const ctx = document.getElementById('myChart1');
 
   new Chart(ctx, {
-    type: 'bar',
+    type: 'doughnut',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{

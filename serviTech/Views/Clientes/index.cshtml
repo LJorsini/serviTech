@@ -2,6 +2,7 @@
     ViewData["Title"] = "Clientes";
 }
 
+<link rel="stylesheet" href="~/css/cliente.css">
 <div>
     <h3 class="h3">CLIENTES</h3>
 </div>
@@ -21,25 +22,103 @@
                     </div>
                 </div>
 
-                <table>
+                <table class="highlight">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>DNI</th>
-                            <th>Direccion</th>
-                            <th>Localidad</th>
-                            <th>Provincia</th>
-                            <th>CP</th>
                             <th>Email</th>
                             <th>Telefono</th>
+                            <th>Reparaciones</th>
+                            
                         </tr>
                     </thead>
 
                     <tbody class="body-tabla">
+                        <tr>
+                            <td>Demi</td>
+                            <td>Molina</td>
+                            <td>demianchiquitapiamolina@AFA.com</td>
+                            <td>35625874</td>
+                            <td>
+                                <button data-target="modal1" class="btn modal-trigger">EDITAR</button>
+                            </td>
+                            <td>
+                                <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">ELIMINAR</button>
+                            </td>
+                            
+                        </tr>
 
-                    </tbody>
+                        <tr>
+                            <td>Lucas</td>
+                            <td>Orsini</td>
+                            <td>lucasorsini@gmail.com</td>
+                            <td>3562504877</td>
+                            <td>
+                                <button class="btn waves-effect waves-light" type="submit" name="action">EDITAR</button>
+                            </td>
+                            <td>
+                                <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">ELIMINAR</button>
+                            </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td>Juan</td>
+                            <td>Perez</td>
+                            <td>jua@gmail.com</td>
+                            <td>356254</td>
+                            <td>
+                                <button class="btn waves-effect waves-light" type="submit" name="action">EDITAR</button>
+                            </td>
+                            <td>
+                                <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">ELIMINAR</button>
+                            </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td>Pedro</td>
+                            <td>Pero</td>
+                            <td>pedro@hotmail.com</td>
+                            <td>35625874</td>
+                            <td>
+                                <button class="btn waves-effect waves-light" type="submit" name="action">EDITAR</button>
+                            </td>
+                            <td>
+                                <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">ELIMINAR</button>
+                            </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td>Lucas</td>
+                            <td>Osorio</td>
+                            <td>osorio@gmail.com</td>
+                            <td>123456</td>
+                            <td>
+                                <button class="btn waves-effect waves-light" type="submit" name="action">EDITAR</button>
+                            </td>
+                            <td>
+                                <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">ELIMINAR</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>    
                 </table>
+
+                <div class="div-paginacion mt-3">
+                    <ul class="pagination center-align">
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                        <li class="active teal lighten-1"><a href="#!">1</a></li>
+                        <li class="waves-effect"><a href="#!">2</a></li>
+                        <li class="waves-effect"><a href="#!">3</a></li>
+                        <li class="waves-effect"><a href="#!">4</a></li>
+                        <li class="waves-effect"><a href="#!">5</a></li>
+                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    </ul>
+                </div>
+                
             </div>
         </li>
 
@@ -78,10 +157,10 @@
 
                     <div class="row">
                         <div class="input-field col s6">
-                            
+
 
                             @Html.DropDownList("provincias", null, htmlAttributes: new { @class = "form-control" })
-                            
+
                             <label for="provincias">Provincia</label>
                         </div>
                         <div class="input-field col s6">
@@ -102,8 +181,10 @@
                     </div>
                 </form>
                 <div class="right-align">
-                    <button class="btn waves-effect waves-light" type="submit" name="action" onclick="GuardarCliente()">Guardar
-                        <i class="material-icons left">save</i></button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action"
+                        onclick="GuardarCliente()">Guardar
+                        <i class="material-icons left">save</i>
+                    </button>
                 </div>
 
             </div>
@@ -112,11 +193,13 @@
         <li>
             <div class="collapsible-header"><i class="material-icons">leaderboard</i>Gráficos</div>
             <div class="collapsible-body">
+                
                 <div class="row ">
                     <div class="input-field outlined col s6  ">
-                        <button class="btn waves-effect waves-light teal lighten-1" onclick="Imprimir()" type="submit" name="action">
+                        <button class="btn waves-effect waves-light teal lighten-1" onclick="Imprimir()" type="submit"
+                            name="action">
                             <i class="material-icons">print</i></button>
-                        @* <i class="material-icons prefix blue-text accent-1">print</i> *@
+                        
                     </div>
                 </div>
                 <div class="row">
@@ -130,12 +213,80 @@
     </ul>
 </div>
 
+<!-- Modal Structure -->
+  <div id="modal1" class="modal modal-cliente">
+    <div class="modal-content ">
+      <h4>Demi Molina</h4>
+      <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">DNI</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Direccion</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Localidad</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
 
 
-</script>
+                            @Html.DropDownList("provincias", null, htmlAttributes: new { @class = "form-control" })
+
+                            <label for="provincias">Provincia</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">CP</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Email</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Telefono</label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="right-align">
+                    <button class="btn waves-effect waves-light" type="button" onclick="GuardarCliente()">Guardar
+                        <i class="material-icons left">save</i>
+                    </button>
+                </div>
+                
+    </div>
+  </div>
+
+
+
+
 @section Scripts {
-        <script src='~/js/graficos.js'></script>
-        @* <script src='~/js/materialize.js'></script> *@
-        @* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> *@
-        
-    }
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/cliente.js"></script>
+}

@@ -13,7 +13,46 @@
         <li>
             <div class="collapsible-header"><i class="material-icons">settings</i>Ordenes de trabajo</div>
             <div class="collapsible-body"> 
+                <div class="row ">
+                    <div class="input-field outlined col s6 offset-s6 ">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <label class="active" for="autocomplete-input">Buscar Orden</label>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nº Orden</th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
 
+                    <tbody class="body-tabla">
+                        <tr>
+                            <td>1</td>
+                            <td>Demi Molina</td>
+                            <td>30/09/2024</td>
+                            <td><button data-target="modal1" class="btn modal-trigger">VER</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Lucas Orsini</td>
+                            <td>30/09/2024</td>
+                            <td><button data-target="modal1" class="btn modal-trigger orange accent-2">VER</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Lucas Orsini</td>
+                            <td>30/09/2024</td>
+                            <td><button data-target="modal1" class="btn modal-trigger red">VER</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </li>
         <li>

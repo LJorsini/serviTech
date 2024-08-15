@@ -13,12 +13,105 @@
         <li>
             <div class="collapsible-header"><i class="material-icons">category</i>Consulta de stock</div>
             <div class="collapsible-body"> 
+                <div class="row ">
+                    <div class="input-field outlined col s6 offset-s6 ">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <label class="active" for="autocomplete-input">Buscar producto</label>
+                    </div>
+                </div>
 
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nº Producto</th>
+                            <th>Producto</th>
+                            <th>Nº Parte</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="body-tabla">
+                        <tr>
+                            <td>1</td>
+                            <td>Flex Motorola</td>
+                            <td>123456<td>
+                            <td>
+                                <button data-target="modal1" class="btn modal-trigger">VER</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Modulo Lgk50</td>
+                            <td>123456<td>
+                            <td><button data-target="modal1" class="btn modal-trigger red">VER</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Pin USB C</td>
+                            <td>123456<td>
+                            <td><button data-target="modal1" class="btn modal-trigger red  yellow darken-3">VER</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">inventory_2</i>Modificar stock</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-body">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">search</i>
+                            <input type="text" id="autocomplete-input" class="autocomplete">
+                            <label class="active" for="autocomplete-input">Buscar Presupuesto</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">DNI</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Direccion</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Localidad</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">CP</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">Email</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Telefono</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">leaderboard</i>Gráficos</div>

@@ -55,13 +55,6 @@
                 <li><a href="~/Presupuestos/Index"><i class="material-icons">request_quote</i>Presupuestos</a></li>
                 <li><a href="~/Ordenes/Index"><i class="material-icons">engineering</i>Ordenes de Trabajo</a></li>
                 <li><a href="~/Stock/Index"><i class="material-icons">inventory</i>Stock</a></li>
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                </ul>
-
                 <li class="center-align">
                     <form class="" asp-area="Identity" asp-page="/Account/Logout"
                         asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -73,12 +66,6 @@
 
 
         </header>
-
-        @* <main class="main-content">
-    <div class="container">
-
-    </div>
-    </main> *@
 
 
         <div class="" id="wrapper">
@@ -103,13 +90,12 @@
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/menu.js"></script>
     <script src="~/js/cliente.js"></script>
-    <script src="~/js/materialize.js"></script>
-    <script src="~/js/graficos.js"></script>
+    <script src="~/js/materialize.js"></script> 
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 
 </html>
