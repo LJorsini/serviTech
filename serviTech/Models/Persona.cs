@@ -1,10 +1,10 @@
-using System.ComponentModel.DataAnnotations;
+/* using System.ComponentModel.DataAnnotations;
 
 
 namespace serviTech.Models {
     public class Persona {
         [Key]
-        public int PersonaID {get; set;}
+        public int ClienteId {get; set;}
         public string? Nombre {get; set;}
         public string? Apellido {get;set;}
         public string? Direccion {get;set;}
@@ -18,4 +18,4 @@ namespace serviTech.Models {
         public virtual ICollection<Cliente> Clientes {get;set;}
         public virtual ICollection<Empleado> Empleados {get;set;}
     }
-}
+} */

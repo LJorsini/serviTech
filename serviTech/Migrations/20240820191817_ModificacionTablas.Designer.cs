@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using serviTech.Data;
 
@@ -11,9 +12,11 @@ using serviTech.Data;
 namespace serviTech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240820191817_ModificacionTablas")]
+    partial class ModificacionTablas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,17 +253,10 @@ namespace serviTech.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProvinciaID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Telefono")
                         .HasColumnType("int");
 
                     b.HasKey("ClienteID");
-
-                    b.HasIndex("LocalidadID");
-
-                    b.HasIndex("ProvinciaID");
 
                     b.ToTable("Clientes");
                 });
@@ -291,17 +287,10 @@ namespace serviTech.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProvinciaID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Telefono")
                         .HasColumnType("int");
 
                     b.HasKey("EmpleadoID");
-
-                    b.HasIndex("LocalidadID");
-
-                    b.HasIndex("ProvinciaID");
 
                     b.ToTable("Empleados");
                 });
@@ -397,36 +386,6 @@ namespace serviTech.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("serviTech.Models.Cliente", b =>
-                {
-                    b.HasOne("serviTech.Models.Localidad", "Localidades")
-                        .WithMany()
-                        .HasForeignKey("LocalidadID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("serviTech.Models.Provincia", null)
-                        .WithMany("Clientes")
-                        .HasForeignKey("ProvinciaID");
-
-                    b.Navigation("Localidades");
-                });
-
-            modelBuilder.Entity("serviTech.Models.Empleado", b =>
-                {
-                    b.HasOne("serviTech.Models.Localidad", "Localidades")
-                        .WithMany()
-                        .HasForeignKey("LocalidadID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("serviTech.Models.Provincia", null)
-                        .WithMany("Empleados")
-                        .HasForeignKey("ProvinciaID");
-
-                    b.Navigation("Localidades");
-                });
-
             modelBuilder.Entity("serviTech.Models.Localidad", b =>
                 {
                     b.HasOne("serviTech.Models.Provincia", "Provincias")
@@ -440,10 +399,6 @@ namespace serviTech.Migrations
 
             modelBuilder.Entity("serviTech.Models.Provincia", b =>
                 {
-                    b.Navigation("Clientes");
-
-                    b.Navigation("Empleados");
-
                     b.Navigation("Localidades");
                 });
 #pragma warning restore 612, 618

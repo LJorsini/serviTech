@@ -11,7 +11,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
-    public DbSet<Persona> Personas {get;set;}
+    /* public DbSet<Persona> Personas {get;set;} */
     public DbSet<Cliente> Clientes {get;set;}
     public DbSet<Empleado> Empleados {get;set;}
     public DbSet<Provincia> Provincias {get;set;}

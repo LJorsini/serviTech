@@ -1,4 +1,4 @@
-/*  using Microsoft.AspNetCore.Mvc;
+ using Microsoft.AspNetCore.Mvc;
 using serviTech.Data;
 
 namespace serviTech.Controllers;
@@ -16,7 +16,7 @@ public class PresupuestosController : Controller {
     }
 }
 
-public class HomeController : Controller
+/* public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private ApplicationDbContext _context;
@@ -45,7 +45,7 @@ public class HomeController : Controller
         await InicializarPermisosUsuario();
         
         return View();
-    }
-} */
+    } */
+
 
     

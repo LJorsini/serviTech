@@ -1,0 +1,62 @@
+@{
+    ViewData["Title"] = "Localidades";
+}
+
+
+<div>
+    <h3 class="h3">Localidades</h3>
+</div>
+<!-- Modal Trigger -->
+
+<div class="container">
+    <button data-target="modal1" class="btn modal-trigger ">Nueva Localidad</button>
+
+
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Agregar Localidad</h4>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="col s6">
+                            <input id="localidadId" type="hiden" value="0">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="nombreLocalidad" type="text" class="validate">
+                            <label for="nombreLocalidad">Nombre Localidad</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="cpLocalidad" type="text" class="validate">
+                            <label for="cpLocalidad">CP</label>
+                        </div>
+                   </div>
+
+                   <div class="row">
+                        <div class="input-field col s12">
+                            <input id="provincia" type="text" class="validate">
+                            <label for="provincia">Nombre Provincia</label>
+                        </div>
+                   </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+@section Scripts {
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/localidad.js"></script>
+}

@@ -7,5 +7,7 @@ namespace serviTech.Models {
         public string? Nombre {get;set;}
 
         public virtual ICollection<Localidad> Localidades {get;set;}
+        public virtual ICollection<Cliente> Clientes {get; set;}
+        public virtual ICollection<Empleado> Empleados {get; set;}
     }
 }
