@@ -120,4 +120,21 @@ public IActionResult Index()
                         <input type="datetime-local" id="fechaFin" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")"/>
                     </div>
 
+
+var selectProvincias = new List<SelectListItem>
+        {
+            new SelectListItem {Value = "0", Text = "[SELECCIONE...]"}
+        };
+        var provincias = _context.Provincias.ToList();
+        var provinciasListItems = provincias.Select(p => new SelectListItem
+        {   
+            Value = p.ProvinciaID.ToString(),
+            Text = p.Nombre
+        });
+
+        ViewBag.Provincias = provinciasListItems;
+        ViewBag.List = new SelectList(provinciasListItems, "Text", "Value");
+        return View();
+    }
+
     

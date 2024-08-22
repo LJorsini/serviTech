@@ -22,7 +22,7 @@ public class ClientesController : Controller
         var provinciasListItems = provincias.Select(p => new SelectListItem
         {   
             Value = p.ProvinciaID.ToString(),
-            Text = p.Nombre
+            Text = p.NombreProvincia
         }).ToList();
 
         ViewBag.Provincias = provinciasListItems;
