@@ -5,9 +5,17 @@ namespace serviTech.Models {
         [Key]
         public int LocalidadID {get;set;}
         public int ProvinciaID {get; set;}
-        public string? Nombre {get;set;}
+        public string? NombreLocalidad {get;set;}
         public int Cp {get;set;}
 
         public virtual Provincia Provincias {get;set;} 
+    }
+
+    public class VistaLocalidad {
+        public int LocalidadID {get;set;}
+        public int ProvinciaID {get;set;}
+        public string? NombreProvincia {get; set;}
+        public string? NombreLocalidad {get; set;}
+        public int Cp {get;set;}
     }
 }

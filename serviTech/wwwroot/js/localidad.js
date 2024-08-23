@@ -1,18 +1,19 @@
 window.onload = Funciona();
 
 function Funciona() {
-    console.log("Funciona")
+    console.log("Funciona12")
 }
 
 function CargarLocalidad() {
-    let localidadid = document.getElementById("localidadId").value;
+    console.log("funciona")
+    let localidadID = document.getElementById("localidadId").value;
     let nombreLocalidad = document.getElementById("nombreLocalidad").value;
     let cpLocalidad = document.getElementById("cpLocalidad").value;
-    let provincia = document.getElementById("provincia").value;
+    let provinciaID = document.getElementById("ProvinciaID").value;
 
     $.ajax({
         url: "../Localidades/GuardarLocalidad", 
-        data: {Localidadid: localidadid, NombreLocalidad: nombreLocalidad, CpLocalidad: cpLocalidad, Provincia: provincia },
+        data: {localidadID: localidadID, provinciaID: provinciaID, nombreLocalidad: nombreLocalidad, cp: cpLocalidad},
         type: "POST", 
         dataType: "json", 
         success: function(response) {
