@@ -8,7 +8,7 @@
 </div>
 <!-- Modal Trigger -->
 
-<div class="container">
+<div class="container div-secciones">
     <button data-target="modal1" class="btn modal-trigger ">Nueva Localidad</button>
 
 
@@ -34,34 +34,54 @@
                             <input id="cpLocalidad" type="text" class="validate">
                             <label for="cpLocalidad">CP</label>
                         </div>
-                   </div>
+                    </div>
 
-                   <div class="row">
+                    <div class="row">
                         <div class="input-field col s12">
-                            
+
                             @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
 
                             <label for="ProvinciaID">Provincia</label>
-                            
+
                         </div>
-                   </div>
+                    </div>
                 </form>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn waves-effect waves-light" type="button" onclick="CargarLocalidad()">Guardar
-                        <i class="material-icons left">save</i>
+                <i class="material-icons left">save</i>
+            </button>
+
+            <button class="btn waves-effect waves-light modal-close" type="button" onclick="LimpiarModal()">Cancelar
+                <i class="material-icons left">cancel</i>
             </button>
         </div>
     </div>
 
+    <div class="">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cp</th>
+                    <th>Provincia</th>
+                </tr>
+            </thead>
+
+            <tbody id="body-tLocalidad">
+
+
+            </tbody>
+        </table>
+    </div>
 
 
 
 </div>
 
 @section Scripts {
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/js/localidad.js"></script>
 }

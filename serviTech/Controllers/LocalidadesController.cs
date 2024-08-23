@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using serviTech.Data;
 using serviTech.Models;
 
@@ -84,7 +85,23 @@ public class LocalidadesController : Controller
     
 
 
+    public IActionResult Lista(int? id, int? provinciaID) {
+        
+        var localidades = _context.Localidades.Include(t => t.Provincias).ToList();
 
+        var mostrarLocalidad = localidades.Select (e => new VistaLocalidad
+        {
+            LocalidadID = e.LocalidadID,
+            ProvinciaID = e.ProvinciaID,
+            NombreProvincia = e.Provincias.NombreProvincia,
+            NombreLocalidad = e.NombreLocalidad,
+            Cp = e.Cp
+        }
+        );
+
+
+        return Json(mostrarLocalidad);
+    }
 
 
 
