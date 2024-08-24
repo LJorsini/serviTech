@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using serviTech.Data;
 using serviTech.Models;
@@ -34,7 +35,7 @@ public class LocalidadesController : Controller
     public IActionResult GuardarLocalidad(int localidadID, int provinciaID, string nombreLocalidad, int cp)
     {
         string resultado = "";
-        
+
         if (!String.IsNullOrEmpty(nombreLocalidad))
         {
             if (localidadID == 0)
@@ -42,7 +43,8 @@ public class LocalidadesController : Controller
                 var existeLocalidad = _context.Localidades.Where(t => t.NombreLocalidad == nombreLocalidad).Count();
                 if (existeLocalidad == 0)
                 {
-                    var nuevaLocalidad = new Localidad{
+                    var nuevaLocalidad = new Localidad
+                    {
                         ProvinciaID = provinciaID,
                         NombreLocalidad = nombreLocalidad.ToUpper(),
                         Cp = cp,
@@ -58,7 +60,7 @@ public class LocalidadesController : Controller
             else
             {
                 var editarLocalidad = _context.Localidades.Where(t => t.LocalidadID == localidadID).SingleOrDefault();
-                if (editarLocalidad !=  null)
+                if (editarLocalidad != null)
                 {
                     var existeLocalidad = _context.Localidades.Where(t => t.NombreLocalidad == nombreLocalidad && t.LocalidadID != localidadID).Count();
 
@@ -74,22 +76,24 @@ public class LocalidadesController : Controller
                         resultado = "YA EXISTE";
                     }
                 }
-                else{
+                else
+                {
                     resultado = "Debe ingresar un nombre";
                 }
             }
         }
-        
+
         return Json(resultado);
     }
-    
 
 
-    public IActionResult Lista(int? id, int? provinciaID) {
-        
+
+    public IActionResult Lista(int? id, int? provinciaID)
+    {
+
         var localidades = _context.Localidades.Include(t => t.Provincias).ToList();
 
-        var mostrarLocalidad = localidades.Select (e => new VistaLocalidad
+        var mostrarLocalidad = localidades.Select(e => new VistaLocalidad
         {
             LocalidadID = e.LocalidadID,
             ProvinciaID = e.ProvinciaID,
@@ -104,9 +108,19 @@ public class LocalidadesController : Controller
     }
 
 
+    public IActionResult Eliminar(int localidadID)
+    {
+        var localidadEliminada = _context.Localidades.Find(localidadID);
+        _context.Remove(localidadEliminada);
+        _context.SaveChanges();
 
+        return Json(localidadEliminada);
+    }
+
+    
 
 
 }
+
 
 

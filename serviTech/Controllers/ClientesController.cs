@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using serviTech.Data;
 using serviTech.Models;
+using System.Globalization;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace serviTech.Controllers;
@@ -21,21 +23,69 @@ public class ClientesController : Controller
 
     public IActionResult Index()
     {
+        var localidades = _context.Localidades.ToList();
+
+        localidades.Add(new Localidad {LocalidadID = 0, NombreLocalidad = "[SELECCIONE...]"});
+
+        ViewBag.LocalidadID = new SelectList(localidades, "LocalidadID", "NombreLocalidad");
 
         var provincias = _context.Provincias.ToList();
-        var provinciasListItems = provincias.Select(p => new SelectListItem
-        {
-            Value = p.ProvinciaID.ToString(),
-            Text = p.NombreProvincia
-        }).ToList();
+        var buscarProvincias = provincias.ToList();
 
-        ViewBag.Provincias = provinciasListItems;
-        ViewBag.List = new SelectList(provinciasListItems, "Text", "Value");
+        provincias.Add(new Provincia { ProvinciaID = 0, NombreProvincia = "[SELECCIONE...]" });
+        buscarProvincias.Add(new Provincia { ProvinciaID = 0, NombreProvincia = "[Todas las Provincias]" });
+
+        ViewBag.ProvinciaID = new SelectList(provincias, "ProvinciaID", "NombreProvincia");
+        ViewBag.buscarProvincias = new SelectList(buscarProvincias, "ProvinciaID", "NombreProvincia");
+
         return View();
+
     }
 
 
-    public JsonResult ListadoClientes(int? id)
+
+      public IActionResult GuardarCliente (int? clienteID, string nombre, string apellido, int dni, string direccion, int localidadID, string email, int telefono) {
+         string error = "";
+         if (!String.IsNullOrEmpty(nombre) || !String.IsNullOrEmpty(apellido))  {
+            if (clienteID == 0) {
+                 var existeDNI = _context.Clientes.Where(d => d.Dni == dni).Count();
+                 if (existeDNI == 0 ) {
+                    var nuevoCliente = new Cliente {
+                        Nombre = nombre,
+                        Apellido = apellido,
+                        Dni = dni,
+                        Direccion = direccion,
+                        Email = email,
+                        Telefono = telefono,
+                        LocalidadID = localidadID,
+                        
+                    
+                    };
+                    _context.Clientes.Add(nuevoCliente);
+                    _context.SaveChanges();
+                 }
+                 else {
+                    /* Else para editar */
+                 }
+            }
+            else {
+                error = "Ya existe un cliente con ese DNI";
+            }
+
+         }
+         else {
+            error = "Ingrese los datos obligatorios";
+         }
+         return Json (error);
+      }
+
+
+
+
+
+
+
+  /*   public JsonResult ListadoClientes(int? id)
     {
 
         var Cliente = _context.Clientes.ToList();
@@ -48,7 +98,7 @@ public class ClientesController : Controller
         }
 
         return Json(Cliente);
-    }
+    } */
 //      public JsonResult GuardarCliente(int ClienteID, string Nombre)
 //     {
 //          string resultado = "";
@@ -98,7 +148,7 @@ public class ClientesController : Controller
 
 
 
-public async Task<IActionResult> GuardarCliente(int? clienteId, string nombre)
+/* public async Task<IActionResult> GuardarCliente(int? clienteId, string nombre)
     {
         if (clienteId.HasValue && !string.IsNullOrEmpty(nombre))
         {
@@ -143,7 +193,7 @@ public async Task<IActionResult> GuardarCliente(int? clienteId, string nombre)
             // Maneja el caso en que el ID o el nombre están vacíos
             return BadRequest(new { mensaje = "Debe proporcionar un ID y un nombre válidos." }); // Retorna un mensaje de error
         }
-    }
+    } */
 
 
 

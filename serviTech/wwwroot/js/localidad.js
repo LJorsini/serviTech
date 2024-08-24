@@ -25,6 +25,10 @@ function MostrarLocalidades() {
                                 <button class="btn waves-effect waves-light" type="submit" name="action" onclick = "EditarLocalidad(${localidad.localidadID})">EDITAR
                                     <i class="material-icons left">edit</i>
                                 </button>
+
+                                <button class="btn waves-effect waves-light red accent-3" type="submit" name="action" onclick = "ValidacionEliminar(${localidad.localidadID})">ELIMINAR
+                                    <i class="material-icons left">delete</i>
+                                </button>
                             </td>
                         </tr>
                 
@@ -76,4 +80,28 @@ function LimpiarModal () {
     document.getElementById("nombreLocalidad").value = "";
     document.getElementById("cpLocalidad").value = "";
     document.getElementById("ProvinciaID").value = 0;
+}
+
+function ValidacionEliminar (localidadID) {
+    let confirmar = confirm("DeseaEliminar?");
+    if (confirmar == true) {
+        EliminarLocalidad(localidadID)
+    }
+}
+
+function EliminarLocalidad (localidadID) {
+    $.ajax({
+        url: "../Localidades/Eliminar", 
+        data: {localidadID: localidadID},
+        type: "POST", 
+        dataType: "json", 
+        success: function(localidadEliminada) {
+            MostrarLocalidades()
+            
+        },
+        error: function(xhr, status) {
+            // Función que se ejecuta si hay un error
+            console.error("Mensaje error");
+        }
+    });
 }

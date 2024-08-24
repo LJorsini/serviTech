@@ -9,6 +9,7 @@ namespace serviTech.Models {
         public int Cp {get;set;}
 
         public virtual Provincia Provincias {get;set;} 
+        public virtual Cliente Clientes {get; set;}
     }
 
     public class VistaLocalidad {

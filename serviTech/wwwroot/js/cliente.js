@@ -1,6 +1,11 @@
-window.onload = ListadoClientes;
+/* window.onload = ListadoClientes; */
+window.onload = Funciona();
 
-function ListadoClientes()
+function Funciona() {
+  console.log("Funciona");
+}
+
+/* function ListadoClientes()
 {
 
   $.ajax({
@@ -57,12 +62,7 @@ function ListadoClientes()
 
   });
 
-}
-
-
-
-
-
+} */
 
 // document.addEventListener('DOMContentLoaded', function ()
 // {
@@ -71,7 +71,7 @@ function ListadoClientes()
 //   var instances = M.Modal.init(elems);
 // });
 
-function LimpiarModal()
+/* function LimpiarModal()
 {
   document.getElementById("ClienteID").value = 0;
   document.getElementById("Nombre").value = "";
@@ -116,52 +116,40 @@ function AbrirBotonEditar(ClienteID)
 
 
 }
+ */
 
-
-function GuardarCliente()
-{
-  let ClienteID = document.getElementById(ClienteID).value;
-  let Apellido = document.getElementById(Apellido).value;
-  let Direccion = document.getElementById(Direccion).value;
-  let LocalidadID = document.getElementById(LocalidadID).value;
-  let ProvinciaID = document.getElementById(ProvinciaID).value;
-  let CP = document.getElementById(CP).value;
-  let Email = document.getElementById(Email).value;
-  let Telefono = document.getElementById(Telefono).value;
-  let Dni = document.getElementById(Dni).value;
-  console.log(ClienteID);
-  $.ajax({
-    url: '../../Cliente/GuardarListadoClientes',
-    data: { 
-      ClienteID: ClienteID, 
-      Apellido: Apellido, 
-      Direccion: Direccion, 
-      LocalidadID: LocalidadID, 
-      ProvinciaID: ProvinciaID,
-      CP: CP,
-      Email: Email,
-      Telefono: Telefono,
-      Dni: Dni
-    },
-    type: 'POST',
-    dataType: 'json',
+function NuevoCliente() {
+  let clienteID = document.getElementById("clienteId").value;
+  let nombre = document.getElementById("nombre").value;
+  let apellido = document.getElementById("apellido").value;
+  let dni = document.getElementById("dni").value;
+  let direccion = document.getElementById("direccion").value;
+  let localidadID = document.getElementById("LocalidadID").value;
+  let email = document.getElementById("email").value;
+  let telefono = document.getElementById("telefono").value;
   
+  $.ajax({
+    url: "../../Clientes/GuardarCliente",
+    data: {clienteID: clienteID,nombre: nombre, apellido:apellido, dni :dni, direccion: direccion, localidadID: localidadID, email: email, telefono: telefono},
+    type: "POST",
+    dataType: "json",
+
     success: function (resultado) {
       if (resultado != "") {
-        Swal.fire(resultado);
+        
       }
-      ListadoClientes();
+      
     },
-  
-    error: function (xhr, status) {
-      console.log('Disculpe, existió un problema al guardar el registro');
-    }
-  });
 
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al guardar el registro");
+    },
+  });
 }
 
 
-function EliminarCliente(ClienteID)
+
+/* function EliminarCliente(ClienteID)
   {
     $.ajax({
       url: '../../Cliente/EliminarListadosClientes',
@@ -185,12 +173,4 @@ function EliminarCliente(ClienteID)
       }
     });
 
-  }
-
-  Swal.fire({
-    position: "top-end",
-    icon: "success",
-    title: "Your work has been saved",
-    showConfirmButton: false,
-    timer: 1500
-  });  
+  }*/
