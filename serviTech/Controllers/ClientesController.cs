@@ -79,6 +79,27 @@ public class ClientesController : Controller
          return Json (error);
       }
 
+      public IActionResult ListaClientes(int? clienteID) {
+        var listaClientes = _context.Clientes.Include(p => p.Localidades).ToList();
+
+        /* listaClientes = _context.Clientes.OrderBy(c => c.Nombre).ToList(); */
+
+        var mostrarClientes = listaClientes.Select(e => new VistaCliente {
+            ClienteID = e.ClienteID,
+            Nombre = e.Nombre,
+            Apellido = e.Apellido,
+            Direccion = e.Direccion,
+            Email = e.Email,
+            Telefono = e.Telefono,
+            Dni = e.Dni,
+            LocalidadID = e.LocalidadID,
+            NombreLocalidad = e.Localidades.NombreLocalidad,
+        });
+         
+        return Json(mostrarClientes);
+
+      }
+
 
 
 

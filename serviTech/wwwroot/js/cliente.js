@@ -1,122 +1,44 @@
-/* window.onload = ListadoClientes; */
-window.onload = Funciona();
+window.onload = MostrarCliente();
 
-function Funciona() {
-  console.log("Funciona");
-}
-
-/* function ListadoClientes()
-{
+function MostrarCliente () {
+  let tablaClientes = ``;
 
   $.ajax({
-    url: '../../Cliente/ListadoClientes',
+    url: "../Clientes/ListaClientes", 
     data: {},
-    type: 'POST',
-    dataType: 'json',
-    success: function (Clientes)
-    {
-      $("#modal1").modal("hide");
-      LimpiarModal();
+    type: "POST", 
+    dataType: "json", 
+    success: function(listaClientes) {
+        $.each(listaClientes, function (index, cliente){
+          tablaClientes += `
+              <tr>
+                            <td>${cliente.nombre}</td>
+                            <td>${cliente.apellido}</td>
+                            <td>${cliente.telefono}</td>
+                            <td>${cliente.nombreLocalidad}</td>
+                            <td>
+                                <button class="btn waves-effect waves-light" type="submit" name="action" onclick = "EditarCliente(${cliente.clienteID})">EDITAR
+                                    <i class="material-icons left">edit</i>
+                                </button>
 
-      let contenidoTabla = ``;
+                                <button class="btn waves-effect waves-light red accent-3" type="submit" name="action" onclick = "ValidacionEliminar(${cliente.clienteID})">ELIMINAR
+                                    <i class="material-icons left">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                  `
+        });
 
-      $.each(Clientes, function (index, Clientes)
-      {
-
-        contenidoTabla += `
-                 <tr>
-                    <td>${Clientes.nombre}</td>
-                    <td>${Clientes.apellido}</td>
-                    <td>${Clientes.direccion}</td>
-                    <td>${Clientes.localidadID}</td>
-                    <td>${Clientes.cp}</td>
-                    <td>${Clientes.email}</td>
-                    <td>${Clientes.telefono}</td>
-                    <td>${Clientes.dni}</td>
-                    <td>${Clientes.reparaciones}</td>
-                    <td class="text-center">
-                    <button type="button" class="btn btn-success btn-sm" onclick="AbrirBotonEditar(${Clientes.ClientesID})">
-                    <i class="fa-solid fa-marker"></i>
-                    </button>
-                    </td>
-                    <td class="text-center">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="EliminarCliente(${Clientes.ClientesID})">
-                    <i class="fa-solid fa-trash"></i>
-                    </button>
-                 </tr>
-
-
-              `;
-      });
-
-
-      document.getElementById("tbody-cliente").innerHTML = contenidoTabla;
-
+        document.getElementById("tabla-cliente").innerHTML = tablaClientes;
+        
+        
     },
-
-
-    error: function (xhr, status)
-    {
-      console.log('Disculpe, existió un problema al cargar el listado');
+    error: function(xhr, status) {
+        // Función que se ejecuta si hay un error
+        console.error("Mensaje error");
     }
-
-  });
-
-} */
-
-// document.addEventListener('DOMContentLoaded', function ()
-// {
-// document.addEventListener('DOMContentLoaded', function() {
-//   var elems = document.querySelectorAll('.modal');
-//   var instances = M.Modal.init(elems);
-// });
-
-/* function LimpiarModal()
-{
-  document.getElementById("ClienteID").value = 0;
-  document.getElementById("Nombre").value = "";
-  document.getElementById("Apellido").value = "";
-  document.getElementById("Direccion").value = "";
-  document.getElementById("LocalidadID").value = 0;
-  document.getElementById("ProvinciaID").value = 0;
-  document.getElementById("CP").value = 0;
-  document.getElementById("Email").value = "";
-  document.getElementById("Telefono").value = 0;
-  document.getElementById("Dni").value = 0;
-
+});
 }
-
-function NuevoCliente()
-{
-  $("#modal1").text("Agregar Cliente");
-}
-
-function AbrirBotonEditar(ClienteID)
-{
-  $.ajax({
-    url: '../../Cliente/ListadoClientes',
-    data: { id: ClienteID },
-    type: 'POST',
-    dataType: 'json',
-    success: function (Clientes)
-    {
-      let Cliente = Cliente[0];
-      document.getElementById("ClienteID").value = ClienteID;
-      $("#modal1").text("Editar Cliente");
-      document.getElementById("Nombre").value = Clientes.ClienteID;
-      $("#modal1").modal("show");
-    },
-
-    error: function (xhr, status)
-    {
-      console.log('Disculpe, existió un problema al cargar el listado');
-    }
-
-  });
-
-
-}
- */
 
 function NuevoCliente() {
   let clienteID = document.getElementById("clienteId").value;
@@ -148,29 +70,16 @@ function NuevoCliente() {
 }
 
 
+function LimpiarModal() {
+  document.getElementById("clienteId").value;
+  document.getElementById("nombre").value;
+  document.getElementById("apellido").value;
+  document.getElementById("dni").value;
+  document.getElementById("direccion").value;
+  document.getElementById("LocalidadID").value;
+  document.getElementById("email").value;
+  document.getElementById("telefono").value;
+}
 
-/* function EliminarCliente(ClienteID)
-  {
-    $.ajax({
-      url: '../../Cliente/EliminarListadosClientes',
-      data: { ClienteID: ClienteID },
-      type: 'POST',
-      dataType: 'json',
 
-      success: function (resultado)
-      {
 
-        if (!resultado)
-        {
-          Swal.fire("No se puede eliminar");
-        }
-        ListadoClientes();
-      },
-
-      error: function (xhr, status)
-      {
-        console.log('Disculpe, existió un problema al eliminar el registro');
-      }
-    });
-
-  }*/

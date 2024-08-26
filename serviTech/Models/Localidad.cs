@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using serviTech.Migrations;
 
 namespace serviTech.Models {
     public class Localidad {
@@ -9,7 +11,7 @@ namespace serviTech.Models {
         public int Cp {get;set;}
 
         public virtual Provincia Provincias {get;set;} 
-        public virtual Cliente Clientes {get; set;}
+        public virtual ICollection<Cliente> Clientes {get; set;}
     }
 
     public class VistaLocalidad {

@@ -24,7 +24,7 @@ namespace serviTech.Models
         public string? Apellido {get;set;}
         public string? Direccion {get;set;}
         public int LocalidadID {get;set;}
-        public int NombreLocalidad {get; set;}
+        public string NombreLocalidad {get; set;}
         public string? Email {get;set;}
         public int? Telefono {get;set;}
         public int? Dni {get;set;}

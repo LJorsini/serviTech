@@ -27,11 +27,11 @@
 
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="nombreLocalidad" type="text" class="validate">
+                            <input id="nombreLocalidad" type="text" class="validate" required>
                             <label for="nombreLocalidad">Nombre Localidad</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="cpLocalidad" type="text" class="validate">
+                            <input id="cpLocalidad" type="text" class="validate" required>
                             <label for="cpLocalidad">CP</label>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn waves-effect waves-light" type="button" onclick="CargarLocalidad()">Guardar
+            <button class="btn waves-effect waves-light modal-close" type="button" onclick="CargarLocalidad()">Guardar
                 <i class="material-icons left">save</i>
             </button>
 

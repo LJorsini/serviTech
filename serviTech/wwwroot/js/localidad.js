@@ -31,12 +31,6 @@ function MostrarLocalidades() {
                                 </button>
                             </td>
                         </tr>
-                
-                
-                
-                
-                
-                
                 `
                 document.getElementById("body-tLocalidad").innerHTML = tabla;
             })
@@ -53,7 +47,7 @@ function MostrarLocalidades() {
 
 function CargarLocalidad() {
     console.log("funciona")
-    /* LimpiarModal (); */
+    LimpiarModal ();
     let localidadID = document.getElementById("localidadId").value;
     let nombreLocalidad = document.getElementById("nombreLocalidad").value;
     let cpLocalidad = document.getElementById("cpLocalidad").value;
@@ -64,9 +58,10 @@ function CargarLocalidad() {
         data: {localidadID: localidadID, provinciaID: provinciaID, nombreLocalidad: nombreLocalidad, cp: cpLocalidad},
         type: "POST", 
         dataType: "json", 
-        success: function(response) {
-            LimpiarModal ();
-            console.log(response);
+        success: function(resultado) {
+            MostrarLocalidades();
+            /* LimpiarModal (); */
+            alert(resultado);
         },
         error: function(xhr, status) {
             

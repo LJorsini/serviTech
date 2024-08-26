@@ -36,7 +36,7 @@ public class LocalidadesController : Controller
     {
         string resultado = "";
 
-        if (!String.IsNullOrEmpty(nombreLocalidad))
+        if ((!String.IsNullOrEmpty(nombreLocalidad)) || cp == null )
         {
             if (localidadID == 0)
             {
@@ -81,6 +81,9 @@ public class LocalidadesController : Controller
                     resultado = "Debe ingresar un nombre";
                 }
             }
+        }
+        else {
+            resultado = "Hay un campo vacio";
         }
 
         return Json(resultado);

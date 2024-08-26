@@ -27,7 +27,7 @@
                         <div class="row ">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">mail</i>
-                                <input asp-for="Input.Email" type="email" id="autocomplete-input" class="autocomplete">
+                                <input asp-for="Input.Email" type="email" id="autocomplete-input" class="autocomplete validate" required>
                                 <label for="autocomplete-input">Email</label>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">key</i>
-                                <input asp-for="Input.Password" type="password" id="autocomplete-input" class="autocomplete">
+                                <input asp-for="Input.Password" type="password" id="autocomplete-input" class="autocomplete validate" required>
                                 <label for="autocomplete-input">Contraseña</label>
                             </div>
                         </div>
