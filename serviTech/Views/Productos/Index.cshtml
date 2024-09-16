@@ -1,10 +1,10 @@
 @{
-    ViewData["Title"] = "Clientes";
+    ViewData["Title"] = "Productos";
 }
 
-<link rel="stylesheet" href="~/css/cliente.css">
+
 <div>
-    <h3 class="h3">CLIENTES</h3>
+    <h3 class="h3">Productos</h3>
 </div>
 
 <!--Seccion Mostrar Cliente -->
@@ -32,14 +32,14 @@
                             
                         </tr>
                     </thead>
-                    <tbody id="tabla-cliente">
+                    <tbody id="tabla-producto">
                         
                     </tbody>
 
                     
                 </table>
 
-                @* <div class="div-paginacion mt-3">
+                <div class="div-paginacion mt-3">
                     <ul class="pagination center-align">
                         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                         <li class="active teal lighten-1"><a href="#!">1</a></li>
@@ -49,7 +49,7 @@
                         <li class="waves-effect"><a href="#!">5</a></li>
                         <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
                     </ul>
-                </div> *@
+                </div>
                 
             </div>
         </li>
@@ -86,10 +86,10 @@
                             <input id="direccion" type="text" class="validate" required>
                             <label for="direccion">Direccion</label>
                         </div>
-                        <div class="input-field col s6">
+                       @*  <div class="input-field col s6">
                             @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "validate" })
                             <label for="LocalidadID">Localidad</label>
-                        </div>
+                        </div> *@
                     </div>
 
                     @* <div class="row">

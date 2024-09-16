@@ -22,11 +22,11 @@ function MostrarLocalidades() {
                             <td>${localidad.cp}</td>
                             <td>${localidad.nombreProvincia}</td>
                             <td>
-                                <button class="btn waves-effect waves-light" type="submit" name="action" onclick = "EditarLocalidad(${localidad.localidadID})">EDITAR
+                                <button class="btn waves-effect waves-light btn-small" type="submit" name="action" onclick = "EditarLocalidad(${localidad.localidadID})">EITAR
                                     <i class="material-icons left">edit</i>
                                 </button>
 
-                                <button class="btn waves-effect waves-light red accent-3" type="submit" name="action" onclick = "ValidacionEliminar(${localidad.localidadID})">ELIMINAR
+                                <button class="btn waves-effect waves-light red accent-3 btn-small" type="submit" name="action" onclick = "ValidacionEliminar(${localidad.localidadID})">ELIMINAR
                                     <i class="material-icons left">delete</i>
                                 </button>
                             </td>

@@ -120,9 +120,6 @@ public class LocalidadesController : Controller
         return Json(localidadEliminada);
     }
 
-    
-
-
 }
 
 

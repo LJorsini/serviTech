@@ -16,6 +16,8 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Empleado> Empleados {get;set;}
     public DbSet<Provincia> Provincias {get;set;}
     public DbSet<Localidad> Localidades {get;set;}
+    public DbSet<Producto> Productos {get;set;}
+    public DbSet<MovimientoStock> MovimientoStocks {get;set;}
 
     
 }

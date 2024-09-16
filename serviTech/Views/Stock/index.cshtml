@@ -12,7 +12,7 @@
     <ul class="collapsible">
         <li>
             <div class="collapsible-header"><i class="material-icons">category</i>Consulta de stock</div>
-            <div class="collapsible-body"> 
+            <div class="collapsible-body">
                 <div class="row ">
                     <div class="input-field outlined col s6 offset-s6 ">
                         <i class="material-icons prefix">search</i>
@@ -26,91 +26,62 @@
                         <tr>
                             <th>Nº Producto</th>
                             <th>Producto</th>
-                            <th>Nº Parte</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
                             <th>Stock</th>
                         </tr>
                     </thead>
 
-                    <tbody class="body-tabla">
-                        <tr>
-                            <td>1</td>
-                            <td>Flex Motorola</td>
-                            <td>123456<td>
-                            <td>
-                                <button data-target="modal1" class="btn modal-trigger">VER</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>Modulo Lgk50</td>
-                            <td>123456<td>
-                            <td><button data-target="modal1" class="btn modal-trigger red">VER</button></td>
-                        </tr>
-
-                        <tr>
-                            <td>3</td>
-                            <td>Pin USB C</td>
-                            <td>123456<td>
-                            <td><button data-target="modal1" class="btn modal-trigger red  yellow darken-3">VER</button></td>
-                        </tr>
+                    <tbody id="body-tablaProductos">
+                        
                     </tbody>
                 </table>
+                
             </div>
+            
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">inventory_2</i>Modificar stock</div>
+            <div class="collapsible-header"><i class="material-icons">inventory_2</i>Nuevo Producto</div>
             <div class="collapsible-body">
-                <form class="col s12">
+                <form id="limpiarFormulario" class="col s12">
                     <div class="row">
+                        @* <div class="input-field col s6">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <label class="active" for="autocomplete-input">Buscar Presupuesto</label>
+                        </div> *@
+                        <input type="show" id="productoID" value="0"/>
                         <div class="input-field col s6">
-                            <i class="material-icons prefix">search</i>
-                            <input type="text" id="autocomplete-input" class="autocomplete">
-                            <label class="active" for="autocomplete-input">Buscar Presupuesto</label>
+                            
+                            <input id="nombreProducto" type="text" class="validate">
+                            <label for="nombreProducto">Nombre</label>
                         </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Apellido</label>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">DNI</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">Direccion</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Localidad</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        
-                        <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">CP</label>
+                            <input id="descripcionProducto" type="text" class="validate">
+                            <label for="descripcionProducto">Descripcion</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">Email</label>
+                            <input id="precioProducto" type="number" class="validate">
+                            <label for="precioProducto">Precio</label>
                         </div>
+
                         <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Telefono</label>
+                            <input id="stockMinimo" type="number" class="validate">
+                            <label for="stockMinimo">Stock Minimo</label>
                         </div>
                     </div>
                 </form>
+
+                <div class="right-align">
+                    <button class="btn waves-effect waves-light" type="submit" name="action"
+                        onclick="NuevoProducto()">Guardar
+                        <i class="material-icons left">save</i>
+                    </button>
+                </div>
             </div>
         </li>
         <li>
@@ -119,3 +90,48 @@
         </li>
     </ul>
 </div>
+
+
+ <!-- Modal Agregar stock -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Movimiento</h4>
+         <form id="limpiarFormulario" class="col s12">
+                    <div class="row">
+                        
+                        <input type="hidden" id="productoID" value="0"/>
+                        <div class="input-field col s6">
+                            
+                            <input id="nombreProducto" type="text" class="validate">
+                            <label for="nombreProducto">Nombre</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="descripcionProducto" type="text" class="validate">
+                            <label for="descripcionProducto">Descripcion</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="precioProducto" type="number" class="validate">
+                            <label for="precioProducto">Precio</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="stockMinimo" type="number" class="validate">
+                            <label for="stockMinimo">Stock Minimo</label>
+                        </div>
+                    </div>
+                </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>         
+
+@section Scripts {
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/productos.js"></script>
+}
