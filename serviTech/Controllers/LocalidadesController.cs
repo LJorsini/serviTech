@@ -20,23 +20,23 @@ public class LocalidadesController : Controller
     public IActionResult Index()
     {
         var provincias = _context.Provincias.ToList();
-        var buscarProvincias = provincias.ToList();
+        /* var buscarProvincias = provincias.ToList(); */
 
         provincias.Add(new Provincia { ProvinciaID = 0, NombreProvincia = "[SELECCIONE...]" });
-        buscarProvincias.Add(new Provincia { ProvinciaID = 0, NombreProvincia = "[Todas las Provincias]" });
+        /* buscarProvincias.Add(new Provincia { ProvinciaID = 0, NombreProvincia = "[Todas las Provincias]" }); */
 
         ViewBag.ProvinciaID = new SelectList(provincias, "ProvinciaID", "NombreProvincia");
-        ViewBag.buscarProvincias = new SelectList(buscarProvincias, "ProvinciaID", "NombreProvincia");
+        /* ViewBag.buscarProvincias = new SelectList(buscarProvincias, "ProvinciaID", "NombreProvincia"); */
 
         return View();
 
     }
 
-    public IActionResult GuardarLocalidad(int localidadID, int provinciaID, string nombreLocalidad, int cp)
+    /*public IActionResult GuardarLocalidad(int localidadID, int provinciaID, string nombreLocalidad, int cp)
     {
         string resultado = "";
 
-        if ((!String.IsNullOrEmpty(nombreLocalidad)) || cp == null )
+        if(!String.IsNullOrEmpty(nombreLocalidad))
         {
             if (localidadID == 0)
             {
@@ -86,6 +86,42 @@ public class LocalidadesController : Controller
             resultado = "Hay un campo vacio";
         }
 
+        return Json(resultado);
+    } */
+
+    public JsonResult GuardarLocalidad(int localidadID, int provinciaID, string? nombreLocalidad, string cp)
+    {
+        string resultado = "";
+        
+
+        if (localidadID == 0)
+        {
+            var localidad = new Localidad
+            {
+                NombreLocalidad = nombreLocalidad,
+                Cp = cp,
+                ProvinciaID = provinciaID,
+                
+            };
+            _context.Add(localidad);
+            _context.SaveChanges();
+
+            resultado = "EL REGISTRO SE GUARDO CORRECTAMENTE";
+        }
+         else
+         {
+             var editarLocalidad = _context.Localidades.Where(e => e.LocalidadID == localidadID).SingleOrDefault();
+             if (editarLocalidad != null)
+             {
+                 editarLocalidad.LocalidadID = localidadID;
+                 editarLocalidad.NombreLocalidad = nombreLocalidad;
+                 editarLocalidad.Cp = cp;
+                 editarLocalidad.ProvinciaID = provinciaID;
+                 _context.SaveChanges();
+
+                 resultado = "EL REGISTRO SE ACTUALIZÓ CORRECTAMENTE";
+             }
+         }
         return Json(resultado);
     }
 

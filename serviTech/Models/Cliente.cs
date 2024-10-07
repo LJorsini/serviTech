@@ -7,8 +7,7 @@ namespace serviTech.Models
     {
         [Key]
         public int ClienteID { get; set; }
-        public string? Nombre {get; set;}
-        public string? Apellido {get;set;}
+        public string? NombreCompleto {get; set;}
         public string? Direccion {get;set;}
         public int LocalidadID {get;set;}
         public string? Email {get;set;}
@@ -20,8 +19,7 @@ namespace serviTech.Models
 
     public class VistaCliente {
         public int ClienteID { get; set; }
-        public string? Nombre {get; set;}
-        public string? Apellido {get;set;}
+        public string? NombreCompleto {get; set;}
         public string? Direccion {get;set;}
         public int LocalidadID {get;set;}
         public string NombreLocalidad {get; set;}

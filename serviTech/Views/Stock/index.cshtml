@@ -45,20 +45,16 @@
             <div class="collapsible-body">
                 <form id="limpiarFormulario" class="col s12">
                     <div class="row">
-                        @* <div class="input-field col s6">
-                        <i class="material-icons prefix">search</i>
-                        <input type="text" id="autocomplete-input" class="autocomplete">
-                        <label class="active" for="autocomplete-input">Buscar Presupuesto</label>
-                        </div> *@
-                        <input type="show" id="productoID" value="0"/>
+                
+                        <input type="hidden" id="productoID" value="0"/>
                         <div class="input-field col s6">
                             
-                            <input id="nombreProducto" type="text" class="validate">
+                            <input id="nombreProducto" type="text" class="validate" oninput="convertirMayusculas(this)">
                             <label for="nombreProducto">Nombre</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input id="descripcionProducto" type="text" class="validate">
+                            <input id="descripcionProducto" type="text" class="validate" oninput="convertirMayusculas(this)">
                             <label for="descripcionProducto">Descripcion</label>
                         </div>
                     </div>
@@ -93,40 +89,58 @@
 
 
  <!-- Modal Agregar stock -->
-  <div id="modal1" class="modal">
+  <div id="agregarStock" class="modal">
     <div class="modal-content">
       <h4>Movimiento</h4>
          <form id="limpiarFormulario" class="col s12">
                     <div class="row">
                         
                         <input type="hidden" id="productoID" value="0"/>
+                        <input type="hidden" id="tipoMovimiento" value="true"/> <!--si esta en true es entrada-->
                         <div class="input-field col s6">
                             
-                            <input id="nombreProducto" type="text" class="validate">
-                            <label for="nombreProducto">Nombre</label>
+                            
+                            <p id="producto"></p>
                         </div>
 
                         <div class="input-field col s6">
-                            <input id="descripcionProducto" type="text" class="validate">
-                            <label for="descripcionProducto">Descripcion</label>
+                            <input id="cantidad" type="text" class="validate">
+                            <label for="cantidad">Cantidad</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="precioProducto" type="number" class="validate">
-                            <label for="precioProducto">Precio</label>
+                            <p id="parrafoStockActual">Stock actual: </p>
+                            
                         </div>
 
                         <div class="input-field col s6">
-                            <input id="stockMinimo" type="number" class="validate">
-                            <label for="stockMinimo">Stock Minimo</label>
+                            <input id="stockMinimoModificar" type="number" class="validate" min="0">
+                            <label for="stockMinimoModificar">Stock Minimo</label>
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="fechaMovimiento" type="date" class="validate">
+                            <label for="fechaMovimiento">Fecha Movimiento</label>
+                            
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="observaciones" type="text" >
+                            <label for="observaciones">Observaciones</label>
+                            
                         </div>
                     </div>
                 </form>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      <button class="btn waves-effect waves-light" type="submit" name="action" onclick="MovimientoStock()">Guardar
+                        <i class="material-icons left">save</i>
+      </button>
     </div>
   </div>         
 

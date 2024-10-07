@@ -12,8 +12,7 @@ function MostrarCliente () {
         $.each(listaClientes, function (index, cliente){
           tablaClientes += `
               <tr>
-                            <td>${cliente.nombre}</td>
-                            <td>${cliente.apellido}</td>
+                            <td>${cliente.nombreCompleto}</td>
                             <td>${cliente.telefono}</td>
                             <td>${cliente.nombreLocalidad}</td>
                             <td>
@@ -42,24 +41,32 @@ function MostrarCliente () {
 
 function NuevoCliente() {
   let clienteID = document.getElementById("clienteId").value;
-  let nombre = document.getElementById("nombre").value;
-  let apellido = document.getElementById("apellido").value;
+  let nombreCompleto = document.getElementById("nombreCompleto").value;
   let dni = document.getElementById("dni").value;
   let direccion = document.getElementById("direccion").value;
   let localidadID = document.getElementById("LocalidadID").value;
   let email = document.getElementById("email").value;
   let telefono = document.getElementById("telefono").value;
+
+  
   
   $.ajax({
     url: "../../Clientes/GuardarCliente",
-    data: {clienteID: clienteID,nombre: nombre, apellido:apellido, dni :dni, direccion: direccion, localidadID: localidadID, email: email, telefono: telefono},
+    data: {clienteID: clienteID,nombreCompleto: nombreCompleto, dni :dni, direccion: direccion, localidadID: localidadID, email: email, telefono: telefono},
     type: "POST",
     dataType: "json",
 
     success: function (resultado) {
-      if (resultado != "") {
-        
-      }
+      console.log(resultado)
+      $('#formCliente')[0].reset();
+      MostrarCliente ()
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "¡Cliente guardado!",
+        showConfirmButton: false,
+        timer: 1500
+      });
       
     },
 
@@ -69,17 +76,45 @@ function NuevoCliente() {
   });
 }
 
-
-function LimpiarModal() {
-  document.getElementById("clienteId").value;
-  document.getElementById("nombre").value;
-  document.getElementById("apellido").value;
-  document.getElementById("dni").value;
-  document.getElementById("direccion").value;
-  document.getElementById("LocalidadID").value;
-  document.getElementById("email").value;
-  document.getElementById("telefono").value;
+function ValidacionEliminar(clienteID) {
+  Swal.fire({
+    title: "¿Desea eliminar a el cliente?",
+    showDenyButton: true,
+    showCancelButton: false,
+    confirmButtonText: "Eliminar",
+    denyButtonText: `Cancelar`
+  }).then((result) => {
+    
+    if (result.isConfirmed) {
+      EliminarCliente (clienteID);
+      
+    } else if (result.isDenied) {
+      Swal.fire("No se elimino el cliente", "", "info");
+    }
+  });
 }
+
+function EliminarCliente(clienteID) {
+  $.ajax({
+      url: '../../Clientes/EliminarCliente',
+      data: { clienteID: clienteID },
+      type: 'POST',
+      dataType: 'json',
+      success: function (EliminarCliente) {
+         Swal.fire("¡Cliente Eliminado!", "", "success");
+         MostrarCliente ();
+      },
+      error: function (xhr, status) {
+          console.log('Problemas al eliminar el cliente');
+      }
+  });
+}
+
+
+function convertirMayusculas(elemento) {
+  elemento.value = elemento.value.toUpperCase();
+}
+
 
 
 

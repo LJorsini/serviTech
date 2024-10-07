@@ -22,7 +22,7 @@ function MostrarLocalidades() {
                             <td>${localidad.cp}</td>
                             <td>${localidad.nombreProvincia}</td>
                             <td>
-                                <button class="btn waves-effect waves-light btn-small" type="submit" name="action" onclick = "EditarLocalidad(${localidad.localidadID})">EITAR
+                                <button class="btn waves-effect waves-light btn-small" type="submit" name="action" onclick = "EditarLocalidad(${localidad.localidadID})">EDITAR
                                     <i class="material-icons left">edit</i>
                                 </button>
 
@@ -46,8 +46,7 @@ function MostrarLocalidades() {
 }
 
 function CargarLocalidad() {
-    console.log("funciona")
-    LimpiarModal ();
+
     let localidadID = document.getElementById("localidadId").value;
     let nombreLocalidad = document.getElementById("nombreLocalidad").value;
     let cpLocalidad = document.getElementById("cpLocalidad").value;
@@ -60,7 +59,7 @@ function CargarLocalidad() {
         dataType: "json", 
         success: function(resultado) {
             MostrarLocalidades();
-            /* LimpiarModal (); */
+            
             alert(resultado);
         },
         error: function(xhr, status) {

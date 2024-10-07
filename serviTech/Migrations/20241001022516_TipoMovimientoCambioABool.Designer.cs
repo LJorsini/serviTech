@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using serviTech.Data;
 
@@ -11,9 +12,11 @@ using serviTech.Data;
 namespace serviTech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241001022516_TipoMovimientoCambioABool")]
+    partial class TipoMovimientoCambioABool
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,6 +235,9 @@ namespace serviTech.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteID"));
 
+                    b.Property<string>("Apellido")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
@@ -244,7 +250,7 @@ namespace serviTech.Migrations
                     b.Property<int>("LocalidadID")
                         .HasColumnType("int");
 
-                    b.Property<string>("NombreCompleto")
+                    b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProvinciaID")
@@ -345,9 +351,6 @@ namespace serviTech.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductoID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StockActual")
                         .HasColumnType("int");
 
                     b.Property<bool>("TipoMovimiento")

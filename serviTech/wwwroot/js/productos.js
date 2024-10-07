@@ -18,24 +18,27 @@ function ListadoProductos () {
                 let colorBoton = "";  //variable para cambiar el color del boton
 
                 // dependiendo el stock va a generar una clase para cambiar el color del boton dependiendo la cantidad de stock del producto
-                if (producto.stockActual === 0) 
-                {
-                    colorBoton = "red"; //stock 0
-                } else if (producto.stockActual <= stockMinimo) {
-                    colorBoton = "yellow" //stock por debajo del minimo
-                } else {
-                    colorBoton = " teal lighten-1" //stock por encima del minimo
-                }
                 
+                
+                if (producto.stockActual === 0) 
+                    {
+                        colorBoton = "red"; //stock 0
+                    } else if (producto.stockActual <= producto.stockMinimo) {
+                        colorBoton = "amber darken-3" //stock por debajo del minimo
+                    } else {
+                        colorBoton = "teal lighten-1" //stock por encima del minimo
+                    }
+                    console.log(stockMinimo);
                 tablaProductos += `
                     <tr>
                         <td>${producto.productoID}</td>
                         <td>${producto.nombre}</td>
                         <td>${producto.descripcion}</td>
                         <td>${producto.precio}</td>
+                        <td>${producto.stockActual}</td>
                         <td>
-                            <button class="btn waves-effect ${colorBoton} btn modal-trigger" data-target="modal1" type="submit" name="action" onclick="ModalAgregarStock(${producto.productoID})">AGREGAR
-                            (${producto.stockActual})
+                            <button class="btn waves-effect ${colorBoton} btn modal-trigger" data-target="agregarStock" type="submit" name="action" onclick="ModalAgregarStock(${producto.productoID})">AGREGAR
+                            
                             </button>
                         </td>
                         
@@ -78,7 +81,8 @@ function NuevoProducto () {
                 showConfirmButton: false,
                 timer: 1500
               });
-            LimpiarFormulario ();
+              ListadoProductos ();
+            
 
         },
         error: function(xhr, status) {
@@ -93,17 +97,30 @@ function NuevoProducto () {
 }
 
 function ModalAgregarStock (productoID) {
+    
     $.ajax({
-        url: "../Productos/ObtenerProductos", 
+        url: "../Productos/Listado", 
         data: {productoID: productoID},
         type: "POST", 
         dataType: "json", 
-        success: function(response) {
-            // Función que se ejecuta si la solicitud es exitosa
-            console.log(response);
+        success: function(productos) {
+            let producto = productos[0];
+
+            document.getElementById("productoID").value = productoID;
+            /* document.getElementById("producto").value = producto.nombre; */
+            document.getElementById("producto").innerHTML = "Producto: " + producto.nombre;
+            document.getElementById("parrafoStockActual").innerHTML = "Stock actual: " + producto.stockActual;
+            document.getElementById("stockMinimoModificar").value = producto.stockMinimo;
+
+            console.log(producto.nombre);
+            console.log(producto.stockMinimo);
+            console.log(productos);
+
+            ListadoProductos ();
+            /* console.log(producto); */
         },
         error: function(xhr, status) {
-            // Función que se ejecuta si hay un error
+            
             console.error("Mensaje error");
         }
     });
@@ -116,4 +133,39 @@ function LimpiarFormulario () {
     document.getElementById("precioProducto").value = 0;
     document.getElementById("stockMinimo").value = 0;
 }
+
+function convertirMayusculas(texto) {
+    texto.value = texto.value.toUpperCase();
+  }
+
+  function MovimientoStock () {
+    let productoMovimientoID = document.getElementById("productoID").value;
+    let tipoMovimiento = document.getElementById("tipoMovimiento").value;
+    let cantidad = document.getElementById("cantidad").value;
+    let stockMinimo = document.getElementById("stockMinimoModificar").value;
+    let fechaMovimiento = document.getElementById("fechaMovimiento").value;
+    let observaciones = document.getElementById("observaciones").value;
+
+
+    $.ajax({
+        url: "../Productos/MovimientoStock", 
+        data: {productoMovimientoID: productoMovimientoID, tipoMovimiento: tipoMovimiento, cantidad:cantidad, stockMinimo:stockMinimo, fechaMovimiento: fechaMovimiento, observaciones:observaciones},
+        type: "POST", 
+        dataType: "json", 
+        success: function(productos) {
+            
+
+            
+
+            
+            
+        },
+        error: function(xhr, status) {
+            
+            console.error("Mensaje error");
+        }
+    });
+
+
+  }
 

@@ -8,8 +8,7 @@ namespace serviTech.Models {
         public int LocalidadID {get;set;}
         public int ProvinciaID {get; set;}
         public string? NombreLocalidad {get;set;}
-        public int Cp {get;set;}
-
+        public string? Cp {get;set;}
         public virtual Provincia Provincias {get;set;} 
         public virtual ICollection<Cliente> Clientes {get; set;}
     }
@@ -19,6 +18,6 @@ namespace serviTech.Models {
         public int ProvinciaID {get;set;}
         public string? NombreProvincia {get; set;}
         public string? NombreLocalidad {get; set;}
-        public int Cp {get;set;}
+        public string? Cp {get;set;}
     }
 }
